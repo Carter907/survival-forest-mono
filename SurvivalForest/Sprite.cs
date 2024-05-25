@@ -3,16 +3,19 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SurvivalForest;
 
-public class Sprite
+public abstract class Sprite
 {
     protected Texture2D _texture;
     protected Vector2 _position;
-    protected Vector2 _size;
 
-    protected Sprite(Texture2D texture, Vector2 position, Vector2 size)
+    protected Sprite(Texture2D texture, Vector2 position)
     {
         _texture = texture;
         _position = position;
-        _size = size;
+        
     }
+
+    public abstract void Draw(SpriteBatch spriteBatch);
+
+    public abstract void Update(GameTime gameTime, GraphicsDeviceManager graphics);
 }
