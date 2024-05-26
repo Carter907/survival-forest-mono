@@ -38,7 +38,7 @@ We welcome contributions Whether it's bug fixes, new features, or improvements, 
 
 ## License
 
-**Survival Forest** is licensed under the MIT License. See the LICENSE file for details.
+**Survival Forest** is licensed under the MIT License. See the [LICENSE file](LICENSE.md) for details.
 
 ## Contact
 
