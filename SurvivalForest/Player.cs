@@ -13,26 +13,25 @@ public class Player : AnimatedSprite
     private bool _isRunning;
 
     public Player(Texture2D texture, Vector2 position, Vector2 size, float speed) :
-        base(texture, position, size, 1, 4, 200)
+        base(texture, position, size)
     {
         _size = size;
         _speed = speed;
         _isRunning = false;
+        AniManager = new AnimationManager(texture, 1, 4, 50);
+        
     }
 
     public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
     {
         
-        if (_currentFrame == _totalFrames)
-            _currentFrame = 1;
-        if (gameTime.TotalGameTime.TotalMilliseconds > _milliSinceLastFrame+_millisPerFrame)
+        AniManager.Update(gameTime, () =>
         {
-            _milliSinceLastFrame = (int)gameTime.TotalGameTime.TotalMilliseconds;
             if (_isRunning)
-                _currentFrame++;
+                AniManager.CurrentFrame++;
             else
-                _currentFrame = 0;
-        }
+                AniManager.CurrentFrame = 0;
+        });
 
         _isRunning = false;
         var kstate = Keyboard.GetState();
@@ -81,20 +80,15 @@ public class Player : AnimatedSprite
 
     public override void Draw(SpriteBatch batch)
     {
-        int width = Texture.Width / Columns;
-        int height = Texture.Height / Rows;
-        int row = _currentFrame / Columns;
-        int column = _currentFrame % Columns;
-
-        Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
+        
 
         batch.Draw(_texture,
             _position,
-            sourceRectangle,
-            Color.IndianRed,
+            AniManager.SourceRectangle,
+            Color.White,
             0f,
-            new Vector2(sourceRectangle.Width / 2f, sourceRectangle.Height / 2f),
-            new Vector2(_size.X / sourceRectangle.Width, _size.Y / sourceRectangle.Height),
+            new Vector2(AniManager.SourceRectangle.Width / 2f, AniManager.SourceRectangle.Height / 2f),
+            new Vector2(_size.X / AniManager.SourceRectangle.Width, _size.Y / AniManager.SourceRectangle.Height),
             SpriteEffects.None,
             0f);
     }
