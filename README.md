@@ -2,7 +2,7 @@
 
 Welcome to **Survival Forest**, a challenging survival game developed using MonoGame in C#. Your mission is to navigate through various environments, managing your resources wisely to ensure your character's survival against the odds.
 
-## Features
+## Goals
 
 - **Dynamic Environments**: Explore lush forests, treacherous mountains, and serene lakes, each offering unique challenges and opportunities.
 - **Resource Management**: Keep track of your character's health, hunger, and thirst levels. Strategize to maintain these vital stats.
@@ -16,7 +16,7 @@ To play **Survival Forest**, follow these steps:
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/SurvivalForest.git
+   git clone https://github.com/Carter907/SurvivalForest.git
    ```
 
 2. Open the solution file `SurvivalForest.sln` in Visual Studio (or another compatible IDE).
@@ -42,8 +42,6 @@ We welcome contributions Whether it's bug fixes, new features, or improvements, 
 
 ## Contact
 
-If you have any questions or need support, please contact us at survivalforestgame@gmail.com.
+If you have any questions or need support, please contact us at speers.carter@gmail.com.
 
 Enjoy surviving in the wilds of **Survival Forest**
-
-Citations:
