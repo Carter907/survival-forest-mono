@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SurvivalForest;
+namespace SurvivalForest.Sprites;
 
 public class ScaledSprite : Sprite
 {

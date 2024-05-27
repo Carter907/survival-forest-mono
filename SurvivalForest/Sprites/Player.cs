@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace SurvivalForest;
+namespace SurvivalForest.Sprites;
 
 public class Player : AnimatedSprite
 {
@@ -18,7 +18,7 @@ public class Player : AnimatedSprite
         _size = size;
         _speed = speed;
         _isRunning = false;
-        AniManager = new AnimationManager(texture, 1, 4, 50);
+        AniManager = new AnimationManager(texture, 1, 4, 200);
         
     }
 
@@ -84,11 +84,11 @@ public class Player : AnimatedSprite
 
         batch.Draw(_texture,
             _position,
-            AniManager.SourceRectangle,
+            AniManager.SourceRectangle(),
             Color.White,
             0f,
-            new Vector2(AniManager.SourceRectangle.Width / 2f, AniManager.SourceRectangle.Height / 2f),
-            new Vector2(_size.X / AniManager.SourceRectangle.Width, _size.Y / AniManager.SourceRectangle.Height),
+            new Vector2(AniManager.SourceRectangle().Width / 2f, AniManager.SourceRectangle().Height / 2f),
+            new Vector2(_size.X / AniManager.SourceRectangle().Width, _size.Y / AniManager.SourceRectangle().Height),
             SpriteEffects.None,
             0f);
     }
