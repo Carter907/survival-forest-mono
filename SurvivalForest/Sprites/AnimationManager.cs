@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace SurvivalForest.Sprites;
@@ -32,19 +33,21 @@ public class AnimationManager
             int row = CurrentFrame / (Columns+1);
             int column = CurrentFrame % Columns;
 
+            
             return new Rectangle(width * column, height * row, width, height); 
        
     }
     public delegate void FrameCallback();
     public void Update(GameTime gameTime, FrameCallback callback)
     {
-        if (CurrentFrame == TotalFrames)
-            CurrentFrame = 1;
+
+
         if (gameTime.TotalGameTime.TotalMilliseconds > MilliSinceLastFrame + MillisPerFrame)
         {
             MilliSinceLastFrame = (int)gameTime.TotalGameTime.TotalMilliseconds;
             
             callback.Invoke();
         }
+        Console.WriteLine(CurrentFrame);
     }
 }

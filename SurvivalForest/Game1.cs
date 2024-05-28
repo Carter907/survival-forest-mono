@@ -45,7 +45,8 @@ public class Game1 : Game
         {
             var randomX = (int)(Random.Shared.NextFloat(0, 1) * _graphics.PreferredBackBufferWidth);
             var randomY = (int)(Random.Shared.NextFloat(0, 1) * _graphics.PreferredBackBufferHeight);
-            _sprites.Add(new ScaledSprite(Content.Load<Texture2D>("tree"), new Vector2(randomX, randomY), new Vector2(50, 50)));
+            var type = i % 20 == 0 ? "dead-tree" : i % 5 == 0 ? "rocks" : "tree";
+            _sprites.Add(new ScaledSprite(Content.Load<Texture2D>(type), new Vector2(randomX, randomY), new Vector2(50, 50)));
         }
         
 
@@ -66,7 +67,7 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(new Color(new Vector3(.1f, .2f, .1f)));
+        GraphicsDevice.Clear(new Color(new Vector3(.15f, .25f, .15f)));
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
         foreach (var sprite in _sprites)
         {
