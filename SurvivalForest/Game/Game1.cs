@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 using SharpDX;
-using SurvivalForest.Sprites;
+using SurvivalForest.Game.Sprites;
+using MGame = Microsoft.Xna.Framework.Game;
 using Color = Microsoft.Xna.Framework.Color;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 
-namespace SurvivalForest;
+namespace SurvivalForest.Game;
 
-public class Game1 : Game
+public class Game1 : MGame
 {
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private Player _player;
     private List<Sprite> _sprites;
+    private OrthographicCamera _camera; 
+
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -26,19 +30,20 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        _player = new Player(
-            Content.Load<Texture2D>("character-atlas"),
-            new Vector2(_graphics.PreferredBackBufferWidth / 2f, _graphics.PreferredBackBufferHeight / 2f),
-            new Vector2(50, 50),
-            100f
-        );
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        _sprites = new List<Sprite> { 
+        _player = new Player(
+            Content.Load<Texture2D>("character-atlas"),
+            new Vector2(_graphics.PreferredBackBufferWidth / 2f, _graphics.PreferredBackBufferHeight / 2f),
+            new Vector2(50, 50),
+            100f
+        );
+        _sprites = new List<Sprite>
+        {
             _player,
         };
         for (int i = 0; i < 50; i++)
@@ -46,10 +51,9 @@ public class Game1 : Game
             var randomX = (int)(Random.Shared.NextFloat(0, 1) * _graphics.PreferredBackBufferWidth);
             var randomY = (int)(Random.Shared.NextFloat(0, 1) * _graphics.PreferredBackBufferHeight);
             var type = i % 20 == 0 ? "dead-tree" : i % 5 == 0 ? "rocks" : "tree";
-            _sprites.Add(new ScaledSprite(Content.Load<Texture2D>(type), new Vector2(randomX, randomY), new Vector2(50, 50)));
+            _sprites.Add(new ScaledSprite(Content.Load<Texture2D>(type), new Vector2(randomX, randomY),
+                new Vector2(50, 50)));
         }
-        
-
     }
 
     protected override void Update(GameTime gameTime)
@@ -73,6 +77,7 @@ public class Game1 : Game
         {
             sprite.Draw(_spriteBatch);
         }
+
         _spriteBatch.End();
 
 

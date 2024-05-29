@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SurvivalForest.Sprites;
+namespace SurvivalForest.Game.Sprites;
 
 public class Enemy : ScaledSprite
 {
@@ -11,11 +11,9 @@ public class Enemy : ScaledSprite
 
     public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
     {
-        
     }
-    
+
     public override void Draw(SpriteBatch spriteBatch)
     {
-        
     }
 }

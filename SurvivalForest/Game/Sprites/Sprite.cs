@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SurvivalForest.Sprites;
+namespace SurvivalForest.Game.Sprites;
 
 public abstract class Sprite
 {
@@ -12,7 +12,6 @@ public abstract class Sprite
     {
         _texture = texture;
         _position = position;
-        
     }
 
     public abstract void Draw(SpriteBatch spriteBatch);

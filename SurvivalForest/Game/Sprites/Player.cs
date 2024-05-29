@@ -1,12 +1,9 @@
-﻿using System;
-using System.Windows.Forms.VisualStyles;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.Direct2D1;
 using SpriteBatch = Microsoft.Xna.Framework.Graphics.SpriteBatch;
 
-namespace SurvivalForest.Sprites;
+namespace SurvivalForest.Game.Sprites;
 
 public class Player : AnimatedSprite
 {
@@ -20,13 +17,11 @@ public class Player : AnimatedSprite
         _size = size;
         _speed = speed;
         _isRunning = false;
-        AniManager = new AnimationManager(texture, 1, 3, 100);
-        
+        AniManager = new AnimationManager(texture, 1, 3, 200);
     }
 
     public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
     {
-        
         AniManager.Update(gameTime, () =>
         {
             if (_isRunning && AniManager.CurrentFrame < AniManager.TotalFrames - 1)
@@ -39,7 +34,6 @@ public class Player : AnimatedSprite
             }
             else
                 AniManager.CurrentFrame = 0;
-
         });
 
         _isRunning = false;
@@ -89,8 +83,6 @@ public class Player : AnimatedSprite
 
     public override void Draw(SpriteBatch batch)
     {
-        
-
         batch.Draw(_texture,
             _position,
             AniManager.SourceRectangle(),
