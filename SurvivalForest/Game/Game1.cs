@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
+using MonoGame.Extended.ViewportAdapters;
 using SharpDX;
 using SurvivalForest.Game.Sprites;
 using MGame = Microsoft.Xna.Framework.Game;
@@ -19,7 +20,7 @@ public class Game1 : MGame
     private SpriteBatch _spriteBatch;
     private Player _player;
     private List<Sprite> _sprites;
-    private OrthographicCamera _camera; 
+    private OrthographicCamera _camera;
 
     public Game1()
     {
@@ -35,13 +36,19 @@ public class Game1 : MGame
 
     protected override void LoadContent()
     {
+        var playerPos = new Vector2(_graphics.PreferredBackBufferWidth / 2f, _graphics.PreferredBackBufferHeight / 2f);
+        var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 400, 240);
+        _camera = new OrthographicCamera(viewportAdapter);
+        _camera.Move(new Vector2(playerPos.X / 2f, playerPos.Y / 2f));
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         _player = new Player(
             Content.Load<Texture2D>("character-atlas"),
-            new Vector2(_graphics.PreferredBackBufferWidth / 2f, _graphics.PreferredBackBufferHeight / 2f),
+            playerPos,
             new Vector2(50, 50),
-            100f
+            200f,
+            _camera
         );
+
         _sprites = new List<Sprite>
         {
             _player,
@@ -72,7 +79,7 @@ public class Game1 : MGame
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(new Color(new Vector3(.15f, .25f, .15f)));
-        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _camera.GetViewMatrix());
         foreach (var sprite in _sprites)
         {
             sprite.Draw(_spriteBatch);
