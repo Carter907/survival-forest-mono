@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SurvivalForest.Game.Sprites;
+namespace SurvivalForest.Game.View;
 
 public class AnimationManager
 {
